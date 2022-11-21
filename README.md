@@ -16,7 +16,7 @@ Playground project built on top of [django-tastypie](https://github.com/django-t
 | ❌ | **API** | Products & Sales (linked tables) |
 |     |         | GET Requests (public), `get/`, `get/id`  |
 |     |         | CREATE, UPD, DEL - reserved for authenticated users |
-| Phase 2# | - | - |
+| **Phase 2#** |  |  |
 | ❌ | `OpenAPI Parser` integration | - |
 | ❌ | `Complete the flow` | OpenAPI -> APIs |
 
