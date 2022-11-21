@@ -1,4 +1,4 @@
-# Django Tastypie `Sample`
+# [Django Tastypie](https://github.com/app-generator/sample-django-tastypie) `Sample`
 
 Playground project built on top of [django-tastypie](https://github.com/django-tastypie/django-tastypie) that aims to translate automatically OpenAPI definitions into secure APIs without coding.
 
@@ -84,4 +84,4 @@ At this point, the app runs at `http://127.0.0.1:8000/`.
 <br />
 
 ---
-Django Tastypie `Sample` - Open-source Starter provided by **[AppSeed](https://appseed.us/)**
+[Django Tastypie](https://github.com/app-generator/sample-django-tastypie) `Sample` - Open-source Starter provided by **[AppSeed](https://appseed.us/)**
