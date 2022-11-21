@@ -15,11 +15,10 @@ Playground project built on top of [django-tastypie](https://github.com/django-t
 | ❌ | **Basic Authentication** | classic user/password |
 | ❌ | **API** | Products & Sales (linked tables) |
 |     |         | GET Requests (public), `get/`, `get/id`  |
-|     |         | Mutating requests (Create, UPD, DEL) (reserved for authenticated users) |
-| - | - | - |
+|     |         | CREATE, UPD, DEL - reserved for authenticated users |
 | Phase 2# | - | - |
 | ❌ | `OpenAPI Parser` integration | - |
-| ❌ | Complet the flow | OpenAPI -> APIs |
+| ❌ | `Complete the flow` | OpenAPI -> APIs |
 
 <br />
 
