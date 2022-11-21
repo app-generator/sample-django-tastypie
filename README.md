@@ -1,11 +1,25 @@
-# Django Core
+# Django Tastypie `Sample`
 
-Minimal **Django** project with `Docker` support - actively supported by [AppSeed](https://appseed.us/) via `Email` and `Discord`.
+Playground project built on top of [django-tastypie](https://github.com/django-tastypie/django-tastypie) that aims to translate automatically OpenAPI definitions into secure APIs without coding.
 
-> Features: 
+<br />
 
-- ✅ `Up-to-date Dependencies`
-- ✅ `Docker`
+> Product Roadmap 
+
+| Status | Item | info | 
+| --- | --- | --- |
+| Phase 1# | - | - |
+| ❌ | `Up-to-date Dependencies` | - |
+| ❌ | [django-tastypie](https://github.com/django-tastypie/django-tastypie) Integration | - |
+| ❌ | **Persistence** | `SQLite`, `MySql` |
+| ❌ | **Basic Authentication** | classic user/password |
+| ❌ | **API** | Products & Sales (linked tables) |
+|     |         | GET Requests (public), `get/`, `get/id`  |
+|     |         | Mutating requests (Create, UPD, DEL) (reserved for authenticated users) |
+| - | - | - |
+| Phase 2# | - | - |
+| ❌ | `OpenAPI Parser` integration | - |
+| ❌ | Complet the flow | OpenAPI -> APIs |
 
 <br />
 
@@ -14,8 +28,8 @@ Minimal **Django** project with `Docker` support - actively supported by [AppSee
 > 👉 **Step 1** - Download the code from the GH repository (using `GIT`) 
 
 ```bash
-$ git clone https://github.com/app-generator/core-django.git
-$ cd core-django
+$ git clone https://github.com/app-generator/sample-django-tastypie.git
+$ cd sample-django-tastypie
 ```
 
 <br />
@@ -35,8 +49,8 @@ Visit `http://localhost:5085` in your browser. The app should be up & running.
 > 👉 Download the code  
 
 ```bash
-$ git clone https://github.com/app-generator/core-django.git
-$ cd core-django
+$ git clone https://github.com/app-generator/sample-django-tastypie.git
+$ cd sample-django-tastypie
 ```
 
 <br />
@@ -71,4 +85,4 @@ At this point, the app runs at `http://127.0.0.1:8000/`.
 <br />
 
 ---
-**Django Core** - Minimal **Django** core provided by **[AppSeed](https://appseed.us/)**
+Django Tastypie `Sample` - Open-source Starter provided by **[AppSeed](https://appseed.us/)**
