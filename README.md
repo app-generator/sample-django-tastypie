@@ -9,15 +9,15 @@ Playground project built on top of [django-tastypie](https://github.com/django-t
 | Status | Item | info | 
 | --- | --- | --- |
 | **Phase 1#** |  |  |
-| ❌ | `Up-to-date Dependencies` | - |
-| ❌ | [django-tastypie](https://github.com/django-tastypie/django-tastypie) Integration | - |
+| ❌ | `Up-to-date Dependencies` |  |
+| ❌ | [django-tastypie](https://github.com/django-tastypie/django-tastypie) Integration |  |
 | ❌ | **Persistence** | `SQLite`, `MySql` |
 | ❌ | **Basic Authentication** | classic user/password |
 | ❌ | **API** | Products & Sales (linked tables) |
 |     |         | GET Requests (public), `get/`, `get/id`  |
 |     |         | CREATE, UPD, DEL - reserved for authenticated users |
 | **Phase 2#** |  |  |
-| ❌ | `OpenAPI Parser` integration | - |
+| ❌ | `OpenAPI Parser` integration |  |
 | ❌ | `Complete the flow` | OpenAPI -> APIs |
 
 <br />
