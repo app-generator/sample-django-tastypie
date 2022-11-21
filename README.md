@@ -8,7 +8,7 @@ Playground project built on top of [django-tastypie](https://github.com/django-t
 
 | Status | Item | info | 
 | --- | --- | --- |
-| Phase 1# | - | - |
+| **Phase 1#** |  |  |
 | ❌ | `Up-to-date Dependencies` | - |
 | ❌ | [django-tastypie](https://github.com/django-tastypie/django-tastypie) Integration | - |
 | ❌ | **Persistence** | `SQLite`, `MySql` |
