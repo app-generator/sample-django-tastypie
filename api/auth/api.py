@@ -1,4 +1,7 @@
+import jwt
 from django.contrib.auth import authenticate
+from django.conf import settings
+from datetime import datetime, timedelta
 from tastypie.exceptions import BadRequest
 from tastypie.resources import ModelResource
 from tastypie import fields
@@ -7,6 +10,15 @@ from api.authentication import PassAuthentication
 from api.user.api import UserResource
 from api.user.models import User
 from django.urls import path
+
+
+def _generate_jwt_token(user):
+    token = jwt.encode(
+        {"id": user.pk, "exp": datetime.utcnow() + timedelta(days=7)},
+        settings.SECRET_KEY,
+    )
+
+    return
 
 
 class AuthenticationResource(ModelResource):
@@ -53,7 +65,16 @@ class AuthenticationResource(ModelResource):
         username = data.pop('username')
         password = data.pop('password')
         user = authenticate(username=username, password=password)
-        if user:
-            return {
-                "good": "good"
-            }
+        if user is None:
+            raise BadRequest({"success": False, "msg": "Wrong credentials"})
+
+        if not user.is_active:
+            raise BadRequest(
+                {"success": False, "msg": "User is not active"}
+            )
+
+        return {
+            "success": True,
+            "token": _generate_jwt_token(user),
+            "user": {"_id": user.pk, "username": user.username, "email": user.email},
+        }
