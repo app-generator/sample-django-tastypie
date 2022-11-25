@@ -8,5 +8,5 @@ api = Api(api_name='v1')
 api.register(AuthenticationResource())
 
 urlpatterns = [
-    path('api', include(api.urls))
+    path('api/', include(api.urls))
 ]
