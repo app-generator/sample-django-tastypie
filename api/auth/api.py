@@ -1,15 +1,17 @@
-import jwt
-from django.contrib.auth import authenticate
-from django.conf import settings
 from datetime import datetime, timedelta
+
+import jwt
+from django.conf import settings
+from django.contrib.auth import authenticate
+from django.urls import re_path
+from tastypie import fields
 from tastypie.exceptions import BadRequest
 from tastypie.resources import ModelResource
-from tastypie import fields
 
+from api.auth.serializers import LoginSerializer
 from api.authentication import PassAuthentication
 from api.user.api import UserResource
 from api.user.models import User
-from django.urls import path
 
 
 def _generate_jwt_token(user):
@@ -18,7 +20,7 @@ def _generate_jwt_token(user):
         settings.SECRET_KEY,
     )
 
-    return
+    return token
 
 
 class AuthenticationResource(ModelResource):
@@ -51,7 +53,7 @@ class AuthenticationResource(ModelResource):
     def prepend_urls(self):
         """Appending urls after profile resource for login and logout."""
         return [
-            path("login", self.wrap_view('login'), name="api_login"),
+            re_path(r"login", self.wrap_view('login'), name="api_login"),
         ]
 
     def login(self, request, **kwargs):
@@ -60,11 +62,14 @@ class AuthenticationResource(ModelResource):
         """
         self.method_check(request, allowed=['post'])
 
-        data = self.deserialize(request, request.body, format=request.META.get(
-            'CONTENT_TYPE', 'application/json'))
-        username = data.pop('username')
-        password = data.pop('password')
+        serializer = LoginSerializer()
+
+        data = serializer.from_json(request.body)
+
+        username = data.get('username')
+        password = data.get('password')
         user = authenticate(username=username, password=password)
+
         if user is None:
             raise BadRequest({"success": False, "msg": "Wrong credentials"})
 
@@ -73,8 +78,8 @@ class AuthenticationResource(ModelResource):
                 {"success": False, "msg": "User is not active"}
             )
 
-        return {
+        return self.create_response(request, {
             "success": True,
             "token": _generate_jwt_token(user),
-            "user": {"_id": user.pk, "username": user.username, "email": user.email},
-        }
+            "user": {"id": user.pk, "username": user.username, "email": user.email},
+        })
