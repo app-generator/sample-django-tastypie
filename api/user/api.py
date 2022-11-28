@@ -8,6 +8,6 @@ class UserResource(ModelResource):
     class Meta:
         queryset = User.objects.all()
         allowed_methods = ['get']
-        resource_name = 'auth/user'
-        fields = ['username', 'email', 'password']
+        resource_name = 'user'
+        fields = ['id', 'username', 'email']
         authentication = JWTAuthentication()
