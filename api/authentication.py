@@ -47,6 +47,7 @@ class JWTAuthentication(Authentication):
             return None
 
         user, _ = self._authenticate_credentials(token)
+
         if user:
             return True
 
@@ -56,7 +57,6 @@ class JWTAuthentication(Authentication):
         return request.user
 
     def _authenticate_credentials(self, token):
-        print(token)
 
         try:
             payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
