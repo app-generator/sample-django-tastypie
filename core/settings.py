@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     "api",
     "api.user",
-    "api.product"
+    "api.product",
+    "api.sale"
 ]
 
 # Custom user Model
