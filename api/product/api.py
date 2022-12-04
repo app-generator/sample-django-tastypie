@@ -3,13 +3,9 @@ from tastypie.authorization import Authorization
 from tastypie.resources import ModelResource
 from tastypie.validation import FormValidation
 
+from api.auth.permissions import UserAuthorization
 from api.authentication import JWTAuthentication
 from api.product.models import Product
-
-
-class ProductAuthorization(Authorization):
-    def create_list(self, object_list, bundle):
-        return True
 
 
 class ProductForm(forms.Form):
@@ -29,7 +25,7 @@ class ProductResource(ModelResource):
         fields = ['id', 'user_id', 'name', 'information', 'description', 'price', 'currency', 'date_created']
         authentication = JWTAuthentication()
         validation = FormValidation(form_class=ProductForm)
-        authorization = ProductAuthorization()
+        authorization = UserAuthorization()
 
 
 
