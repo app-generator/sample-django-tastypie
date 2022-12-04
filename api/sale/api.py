@@ -31,7 +31,7 @@ class SaleForm(forms.Form):
 class SaleResource(ModelResource):
     class Meta:
         queryset = Sale.objects.all()
-        allowed_methods = ['get', "post"]
+        allowed_methods = ['get', "post", "delete", "put"]
         resource_name = 'sales'
         fields = ['id', 'product', 'state', 'value', 'fee', 'client', 'currency', 'payment_type', 'purchase_date']
         authentication = JWTAuthentication()

@@ -20,7 +20,7 @@ class ProductForm(forms.Form):
 class ProductResource(ModelResource):
     class Meta:
         queryset = Product.objects.all()
-        allowed_methods = ['get', "post", "delete"]
+        allowed_methods = ['get', "post", "delete", "put"]
         resource_name = 'products'
         fields = ['id', 'user_id', 'name', 'information', 'description', 'price', 'currency', 'date_created']
         authentication = JWTAuthentication()
