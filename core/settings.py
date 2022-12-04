@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "api",
-    "api.user"
+    "api.user",
+    "api.product"
 ]
 
 # Custom user Model
