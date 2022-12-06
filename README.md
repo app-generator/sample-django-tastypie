@@ -85,7 +85,7 @@ At this point, the app runs at `http://127.0.0.1:8000/`.
 
 > 👉 How to use
 
-This project provides endpoints for authentication, user profiles, products and sales. The users, products and sales endpoints requires to pass a JWT token in the headers with the following format `Authorization: Bearer <JWT Token>` that you can obtain by log in at the `/api/v1/auth/login/` endpoint. 
+This project provides endpoints for authentication, user profiles, products, and sales. The users, products, and sales endpoints require the developer to pass a JWT token in the headers with the following format `Authorization: Bearer <JWT Token>` that you can obtain by login at the `/api/v1/auth/login/` endpoint. 
 
 ```json
 POST /api/v1/auth/login/
@@ -95,7 +95,7 @@ POST /api/v1/auth/login/
 }
 ```
 
-> Note: To register, you can send a POST request to this endpoint `/api/v1/auth/` with a `password`, `username` and `email` fields present in the payload. 
+> Note: To register, you can send a POST request to this endpoint `/api/v1/auth/` with a `password`, `username`, and `email` fields present in the payload. 
 
 The request on the `login` endpoint will return a JWT token you can grab to make requests on the `/api/v1/products/`, `/api/v1/users/` and `/api/v1/sales/`. 
 
