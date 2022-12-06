@@ -83,5 +83,52 @@ At this point, the app runs at `http://127.0.0.1:8000/`.
 
 <br />
 
+> 👉 How to use
+
+This project provides endpoints for authentication, user profiles, products and sales. The users, products and sales endpoints requires to pass a JWT token in the headers with the following format `Authorization: Bearer <JWT Token>` that you can obtain by log in at the `/api/v1/auth/login/` endpoint. 
+
+```json
+POST /api/v1/auth/login/
+{
+	"password": "12345678",
+	"username": "koladev33@gmail.com"
+}
+```
+
+> Note: To register, you can send a POST request to this endpoint `/api/v1/auth/` with a `password`, `username` and `email` fields present in the payload. 
+
+The request on the `login` endpoint will return a JWT token you can grab to make requests on the `/api/v1/products/`, `/api/v1/users/` and `/api/v1/sales/`. 
+
+**Validation**
+
+Tastypie allows you to write validation schemes using Django forms. You can find an example of this at `api/sale/api.py`.
+
+```python
+class SaleForm(forms.Form):
+    product = forms.IntegerField()
+    state = forms.IntegerField()
+    value = forms.IntegerField()
+    fee = forms.IntegerField()
+    client = forms.CharField(max_length=128)
+    currency = forms.CharField(max_length=10, required=False)
+    payment_type = forms.CharField(max_length=10, required=False)
+
+    def clean_product(self):
+        product_id = self.cleaned_data['product']
+
+        try:
+            product = Product.objects.get(id=product_id)
+            return product
+        except Product.DoesNotExist:
+            raise ValidationError("This product doesn't exist.")
+            
+class SaleResource(ModelResource):
+    class Meta:
+        ...
+        validation = FormValidation(form_class=SaleForm)
+        authorization = UserAuthorization()
+
+```
+
 ---
 [Django Tastypie](https://github.com/app-generator/sample-django-tastypie) `Sample` - Open-source Starter provided by **[AppSeed](https://appseed.us/)**
