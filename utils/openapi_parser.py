@@ -1,3 +1,5 @@
+# NOTE: This script comes from the following GitHub repository: https://github.com/app-generator/devtool-openapi-parser
+
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 import json
 import operator
