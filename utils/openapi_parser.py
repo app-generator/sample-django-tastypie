@@ -158,6 +158,8 @@ class OAJsonParser(object):
 # Entry Point
 if __name__ == "__main__":
 
+    data = {}
+
     # Count Arguments
     args = len(sys.argv)
 
@@ -201,5 +203,11 @@ if __name__ == "__main__":
         model = openAPI_schema.get_model_dict(m)
         model_json = openAPI_schema.get_model_json(m)
 
+        data[m] = {
+            "fields": model_json
+        }
+
         print("[DICT " + m + "] -> " + str(model))
         print("[JSON " + m + "] -> " + str(model_json))
+
+    print(json.dumps(data))
