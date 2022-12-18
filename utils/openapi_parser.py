@@ -5,10 +5,25 @@ import json
 import operator
 import sys
 from glom import glom
+import os
 
 iteritems = operator.methodcaller("items")
 unicode = str
 basestring = str
+
+
+def _write_fields(name, field_type):
+    field = ""
+
+    if field_type not in ["number", "string"]:
+        return NotImplementedError
+
+    if field_type == "number":
+        field = "models.IntegerField()"
+    elif field_type == "string":
+        field = "models.CharField(max_length=255)"
+
+    return f"{name.lower()} = {field}"
 
 
 # %%----------------------------------------------------------------
@@ -203,11 +218,68 @@ if __name__ == "__main__":
         model = openAPI_schema.get_model_dict(m)
         model_json = openAPI_schema.get_model_json(m)
 
-        data[m] = {
-            "fields": model_json
-        }
+        data[m] = {"fields": model_json}
 
-        print("[DICT " + m + "] -> " + str(model))
-        print("[JSON " + m + "] -> " + str(model_json))
+    models_data = []
 
-    print(json.dumps(data))
+    for model, struct in data.items():
+        # models data items will have the following structure:
+        # [{'model': 'Product', 'fields': dict_values([{'type': 'number'}, {'type': 'string'}, {'type': 'number'}])}]
+        models_data.append({"model": str(model), "fields": struct["fields"]})
+
+    for data in models_data:
+        os.chdir(
+            ".."
+        )  # By default, we generate the applications in the root file. Feel free to change the directory.
+        app_name = data["model"].lower()
+        os.system(f"django-admin startapp {app_name}")
+
+        # Generating Models file
+        # For the moment, char fields and integer fields are supported.
+
+        with open(f"{app_name}/models.py", "w") as model_file:
+
+            model_file.writelines(["# Generated using Open Api Parser", "\n"])
+
+            model_file.writelines(
+                [
+                    f"from django.db import models\n",
+                    f"class {data['model']}(models.Model):",
+                    "\n\t",
+                ]
+            )
+
+            for field in data["fields"]:
+                field_data = _write_fields(field, data["fields"][field]["type"])
+                model_file.write(field_data)
+                model_file.writelines("\n\t")
+
+        # Generating API file
+        # By default, there is no authorization and authentication and all methods are permitted.
+
+        with open(f"{app_name}/api.py", "w") as model_file:
+
+            model_file.writelines(["# Generated using Open Api Parser", "\n"])
+
+            model_file.writelines(
+                [
+                    f"from tastypie.resources import ModelResource\n",
+                    f"from {app_name}.models import {data['model']}\n",
+                    f"class {data['model']}Resource(ModelResource):",
+                    "\n\t",
+                ]
+            )
+            model_file.writelines(["class Meta:", "\n\t\t"])
+
+            fields = list([str(field).lower() for field in data["fields"]])
+
+            model_file.writelines(
+                [f"queryset = {data['model']}.objects.all()", "\n\t\t"]
+            )
+            model_file.writelines(
+                ["allowed_methods = ['get', 'post', 'delete', 'put']", "\n\t\t"]
+            )
+            model_file.writelines([f"fields = {str(fields)}", "\n\t\t"])
+
+        # Formatting files following Python standards using black package
+        os.system(f"black {app_name}/")
