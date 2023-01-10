@@ -132,7 +132,9 @@ class SaleResource(ModelResource):
 
  👉 Generate models and API files
  
-On the `openapi` branch, we have added a script extended from the devtool repository: https://github.com/app-generator/devtool-openapi-parser. The scrpt is extended to generate a Django application at the root of the project (You can modify this setting in the `utils/openapi_parser.py` file) with a Django model and an API file based on the `openapi.json` file. 
+On the `openapi` branch, we have added a script extended from the devtool repository: https://github.com/app-generator/devtool-openapi-parser. 
+
+The script is extended to generate a Django application at the root of the project (You can modify this setting in the `utils/openapi_parser.py` file) with a Django model and an API file based on the `openapi.json` file. 
 For the moment, `string` and `number` type of fields are supported. To run the script, use the following command: 
 ```
 python utils/openapi_parser.py openapi.json 
