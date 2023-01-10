@@ -5,6 +5,10 @@ from tastypie.exceptions import BadRequest
 
 from api.user.models import User
 
+SAFE_METHODS = [
+    "GET", "HEAD", "OPTIONS"
+]
+
 
 def get_authorization_header(request):
     """
@@ -28,6 +32,9 @@ class PassAuthentication(Authentication):
 class JWTAuthentication(Authentication):
 
     def is_authenticated(self, request, **kwargs):
+        if request.method in SAFE_METHODS:
+            return True
+
         request.user = None
 
         auth_header = get_authorization_header(request).split()
