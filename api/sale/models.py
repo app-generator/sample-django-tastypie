@@ -2,7 +2,11 @@ from django.db import models
 
 
 class Sale(models.Model):
-    product = models.ForeignKey("api_product.Product", on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        "api_product.Product",
+        on_delete=models.CASCADE,
+        related_name='product_sales'
+    )
     state = models.IntegerField()
     value = models.IntegerField()
     fee = models.IntegerField(default=0)

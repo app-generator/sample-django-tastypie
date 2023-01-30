@@ -1,3 +1,6 @@
 from django.contrib import admin
+from api.sale.models import Sale
+from api.product.models import Product
 
-# Register your models here.
+admin.site.register(Sale)
+admin.site.register(Product)

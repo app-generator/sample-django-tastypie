@@ -6,6 +6,11 @@ from tastypie.validation import FormValidation
 from api.auth.permissions import UserAuthorization
 from api.authentication import JWTAuthentication
 from api.product.models import Product
+from tastypie.resources import Resource
+
+from tastypie import fields, utils
+
+from api.sale.api import SaleResource
 
 
 class ProductForm(forms.Form):
@@ -18,11 +23,12 @@ class ProductForm(forms.Form):
 
 
 class ProductResource(ModelResource):
+    product_sales = fields.ToManyField(SaleResource, 'product_sales', full=True)
     class Meta:
         queryset = Product.objects.all()
         allowed_methods = ['get', "post", "delete", "put"]
         resource_name = 'products'
-        fields = ['id', 'user_id', 'name', 'information', 'description', 'price', 'currency', 'date_created']
+        fields = ['id', 'user_id', 'name', 'information', 'description', 'price', 'currency', 'date_created', 'product_sales']
         authentication = JWTAuthentication()
         validation = FormValidation(form_class=ProductForm)
         authorization = UserAuthorization()
