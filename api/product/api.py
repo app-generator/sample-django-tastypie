@@ -11,6 +11,8 @@ from tastypie.resources import Resource
 from tastypie import fields, utils
 
 from api.sale.api import SaleResource
+from tastypie.serializers import Serializer
+
 
 
 class ProductForm(forms.Form):
@@ -32,6 +34,11 @@ class ProductResource(ModelResource):
         authentication = JWTAuthentication()
         validation = FormValidation(form_class=ProductForm)
         authorization = UserAuthorization()
+        serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'plist'])
+
+    
+    def to_yaml(self,bundle, options):
+        return Serializer.from_yaml(self, bundle)
 
 
 

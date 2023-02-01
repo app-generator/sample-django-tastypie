@@ -7,6 +7,7 @@ from api.auth.permissions import UserAuthorization
 from api.authentication import JWTAuthentication
 from api.product.models import Product
 from api.sale.models import Sale
+from tastypie.serializers import Serializer
 
 
 class SaleForm(forms.Form):
@@ -37,3 +38,8 @@ class SaleResource(ModelResource):
         authentication = JWTAuthentication()
         validation = FormValidation(form_class=SaleForm)
         authorization = UserAuthorization()
+
+    def to_yaml(self,bundle, options):
+        return Serializer.from_yaml(self, bundle)
+
+

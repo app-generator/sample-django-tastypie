@@ -2,3 +2,5 @@ Django==4.0.0
 gunicorn==20.1.0
 django-tastypie==0.14.4
 pyjwt==2.6.0
+PyYAML==6.0
+lxml==4.9.2
