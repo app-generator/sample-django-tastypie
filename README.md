@@ -363,3 +363,50 @@ http://127.0.0.1:8000/api/v1/products/schema/
     }
 }
 ```
+
+# YAML
+for yaml response, please try with this way:
+
+http://127.0.0.1:8000/api/v1/products/?format=yaml
+here `format=yaml` is import for yaml response
+
+it will response like this
+
+```
+meta:
+  limit: 20
+  next: null
+  offset: 0
+  previous: null
+  total_count: 2
+objects:
+- currency: USD
+  date_created: '2023-01-29T11:11:38.443682'
+  description: A simple description goes there
+  id: 1
+  information: IOT
+  name: chatGPT home controller
+  price: 3333
+  product_sales:
+  - client: dfssfd
+    currency: USD
+    fee: 44
+    id: 1
+    payment_type: cc
+    purchase_date: '2023-01-29T11:11:44.574313'
+    resource_uri: /api/v1/sales/1/
+    state: 44
+    value: 444
+  resource_uri: /api/v1/products/1/
+  user_id: 1
+- currency: USD
+  date_created: '2023-01-31T08:21:03.990211'
+  description: A simple description goes there
+  id: 2
+  information: IOT
+  name: CybeBOT
+  price: 10
+  product_sales: []
+  resource_uri: /api/v1/products/2/
+  user_id: 1
+```
