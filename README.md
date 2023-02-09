@@ -365,10 +365,32 @@ http://127.0.0.1:8000/api/v1/products/schema/
 ```
 
 # YAML
+
+Serialize data for ymal:
+
+```
+class ProductResource(ModelResource):
+    product_sales = fields.ToManyField(SaleResource, 'product_sales', full=True)
+    class Meta:
+        queryset = Product.objects.all()
+        allowed_methods = ['get', "post", "delete", "put"]
+        resource_name = 'products'
+        fields = ['id', 'user_id', 'name', 'information', 'description', 'price', 'currency', 'date_created', 'product_sales']
+        authentication = JWTAuthentication()
+        validation = FormValidation(form_class=ProductForm)
+        authorization = UserAuthorization()
+        serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'plist'])
+
+    
+    def to_yaml(self,bundle, options):
+        return Serializer.from_yaml(self, bundle)
+
+```
+
 for yaml response, please try with this way:
 
 http://127.0.0.1:8000/api/v1/products/?format=yaml
-here `format=yaml` is import for yaml response
+here `format=yaml` is important for yaml response
 
 it will response like this
 
